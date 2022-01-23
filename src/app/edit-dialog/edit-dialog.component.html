@@ -1,0 +1,56 @@
+<div class="container">
+  <form
+  id="login-form"
+  class="form"
+  novalidate
+  [formGroup]="personForm"
+  >
+
+    <h1 class="text-center my-4 h3">Edit user</h1>
+    <div class="form-group">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        class="form-control"
+        formControlName="name"
+        placeholder="name"
+        autocomplete="off"
+
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+      type="text"
+      name="surname"
+      id="surname"
+      class="form-control"
+      formControlName="surname"
+      placeholder="Surname"
+      autocomplete="off"
+
+    />
+    </div>
+
+
+    <div class="form-group">
+
+      <div class="p-fluid p-grid p-formgrid">
+        <div class="p-field p-col-12 p-md-4">
+          <label>Basic</label>
+          <p-calendar formControlName="dob"></p-calendar>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      name="submit"
+      class="btn btn-outline-success btn-lg btn-block"
+      (click)="onSave()"
+    >Publish</button>   
+
+  </form>
+</div>
+
