@@ -2,76 +2,21 @@
   {
     "name": "Michael",
     "surname": "Hudson",
-    "age": 30
+    "dob": "1991-09-03T16:17:28.000Z"
   },
   {
     "name": "Kirsten",
     "surname": "Webster",
-    "age": 27
+    "dob": "1995-07-03T16:17:28.000Z"
   },
   {
     "name": "Tobie",
     "surname": "Louw",
-    "age": 32
+    "dob": "1989-03-03T16:17:28.000Z"
   },
   {
     "name": "Michael",
     "surname": "Hudson",
-    "age": 30
-  },
-  {
-    "name": "Kirsten",
-    "surname": "Webster",
-    "age": 27
-  },
-  {
-    "name": "Tobie",
-    "surname": "Louw",
-    "age": 32
-  },
-  {
-    "name": "Michael",
-    "surname": "Hudson",
-    "age": 30
-  },
-  {
-    "name": "Kirsten",
-    "surname": "Webster",
-    "age": 27
-  },
-  {
-    "name": "Tobie",
-    "surname": "Louw",
-    "age": 32
-  },
-  {
-    "name": "Michael",
-    "surname": "Hudson",
-    "age": 30
-  },
-  {
-    "name": "Kirsten",
-    "surname": "Webster",
-    "age": 27
-  },
-  {
-    "name": "Tobie",
-    "surname": "Louw",
-    "age": 32
-  },
-  {
-    "name": "Michael",
-    "surname": "Hudson",
-    "age": 30
-  },
-  {
-    "name": "Kirsten",
-    "surname": "Webster",
-    "age": 27
-  },
-  {
-    "name": "Tobie",
-    "surname": "Louw",
-    "age": 32
+    "dob": "1979-11-03T16:17:28.000Z"
   }
 ]

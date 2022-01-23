@@ -1,10 +1,10 @@
-<div class="card-wrapper">
-  <mat-card class="main-card" *ngFor="let month of months">
+<div *ngIf="months.length > 0" class="card-wrapper">
+  <mat-card class="main-card" *ngFor="let item of data | keyvalue">
     <mat-card-header>
-      <mat-card-title> {{ month }} </mat-card-title>
+      <mat-card-title> {{ item.key }} </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <h3>7</h3>
+      <h3>{{ item.value }}</h3>
     </mat-card-content>
   </mat-card>
 </div>

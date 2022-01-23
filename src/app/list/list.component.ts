@@ -4,11 +4,10 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-interface Country {
+interface Person {
   name: string;
-  flag: string;
-  area: number;
-  population: number;
+  surname: string;
+  dob: Date;
 }
 
 @Component({
@@ -30,7 +29,7 @@ export class ListComponent implements OnInit {
   // pageEvent: PageEvent;
   pageSize = 3;
   pageSizeOptions: number[] = [3, 5, 7];
-  countries: Country[] = [];
+  // countries: Person[] = [];
 
   displayedColumns: string[] = [ 'name', 'surname', 'age', 'edit', 'remove'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource()
@@ -39,7 +38,7 @@ export class ListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<Country[]>('../assets/people.json')
+    this.http.get<Person[]>('../assets/people.json')
       .subscribe((data: any) => {
         //Is important
         this.dataSource = new MatTableDataSource(data);
