@@ -1,0 +1,19 @@
+.navbar {
+  height: 60px;
+  background: grey;
+}
+
+.navbar-nav {
+  display: flex;
+  column-gap: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  margin-left: 2rem;
+}
+
+.nav-item {
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+}

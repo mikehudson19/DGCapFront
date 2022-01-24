@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
+import { PersonApiService } from '../services/api/person-api.service';
 
 interface Person {
   name: string;
@@ -16,11 +17,10 @@ interface Person {
 })
 export class ReportComponent implements OnInit {
 
-  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   data = {};
   people: Person[] = [];
   loadPage: boolean = false;
-  monthsObj = {
+  months = {
     January: 0,
     February: 0,
     March: 0,
@@ -33,36 +33,74 @@ export class ReportComponent implements OnInit {
     October: 0,
     November: 0,
     December: 0
-  }
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private personService: PersonApiService) { }
 
   ngOnInit(): void {
 
-    this.http.get<Person[]>('../assets/people.json')
+    this.personService.getPersons()
       .pipe(
         map(res => { 
-          const dates = res.map(x => {
+          const dates = res.rows.map((x: any) => {
             return new Date(x.dob).getMonth();
           })  
           return dates;
         })
       )
       .subscribe((dates) => {
-        // const monthsObj: any = {};
-
-        for (let i = 0; i < dates.length; i++) {
-          // TODO: Need to find a way to get this to work, dispaying the months with 0 people.
-          let num = dates[i];
-          let month: any = this.months[num];
-          // this.monthsObj[month]++
-          // monthsObj[this.months[num]] ? monthsObj[this.months[num]] = 1 : monthsObj[this.months[num]]++;
-        }
-        console.log(this.monthsObj);
-        // this.data = monthsObj;
+        this.populateMonths(dates);
         this.loadPage = true;
       })
 
+  }
+
+  populateMonths(dates: any) {
+    for (let i = 0; i < dates.length; i++) {
+      let num = dates[i];
+
+      switch (num) {
+        case 0:
+        this.months["January"]++  
+          break;
+        case 1:
+        this.months["February"]++  
+          break;
+          case 2:
+        this.months["March"]++  
+          break;
+          case 3:
+        this.months["April"]++  
+          break;
+          case 4:
+        this.months["May"]++  
+          break;
+          case 5:
+        this.months["June"]++  
+          break;
+          case 6:
+        this.months["July"]++  
+          break;
+          case 7:
+        this.months["August"]++  
+          break;
+          case 8:
+        this.months["September"]++  
+          break;
+          case 9:
+        this.months["October"]++  
+          break;
+          case 10:
+        this.months["November"]++  
+          break;
+          case 11:
+        this.months["December"]++  
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 
 }

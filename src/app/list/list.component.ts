@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs/operators';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { PersonApiService } from '../services/api/person-api.service';
 
 interface Person {
   name: string;
@@ -33,14 +34,17 @@ export class ListComponent implements OnInit {
   // @ViewChild(MatSort) sort: MatSort;
 
   constructor(private http: HttpClient,
-              private dialogRef: MatDialog) { }
+              private dialogRef: MatDialog,
+              private personService: PersonApiService) { }
 
   ngOnInit(): void {
-    this.http.get<Person[]>('../assets/people.json')
+
+    this.personService.getPersons()
       .pipe(
         map(res => { 
-          const data = res.map(x => {
+          const data = res.rows.map((x: any) => {
             return {
+              id: x.id,
               name: x.name,
               surname: x.surname,
               age: this.convertDob(x.dob)
@@ -85,9 +89,19 @@ export class ListComponent implements OnInit {
     // this.dataSource.sort = this.sort;
   }
 
-  openDialog(){
-    this.dialogRef.open(EditDialogComponent);
+  openDialog(id: number){
+    console.log(id);
+    this.dialogRef.open(EditDialogComponent, {
+      data: {
+        id
+      }
+    });
   }
 
-
+  deletePerson(id: number) {
+    this.personService.deletePerson(id)
+      .subscribe(res => {
+        console.log(res);
+      })
+  }
 }

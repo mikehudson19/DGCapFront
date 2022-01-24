@@ -6,7 +6,8 @@
   [formGroup]="personForm"
   >
 
-    <h1 class="text-center my-4 h3">Edit user</h1>
+  <div class="flex-form">
+    <h1 class="text-center my-4 h3">{{ id > 0 ? 'Edit' : 'Add' }} person</h1>
     <div class="form-group">
       <input
         type="text"
@@ -14,9 +15,8 @@
         id="name"
         class="form-control"
         formControlName="name"
-        placeholder="name"
+        placeholder="Name"
         autocomplete="off"
-
       />
     </div>
 
@@ -29,7 +29,6 @@
       formControlName="surname"
       placeholder="Surname"
       autocomplete="off"
-
     />
     </div>
 
@@ -38,19 +37,20 @@
 
       <div class="p-fluid p-grid p-formgrid">
         <div class="p-field p-col-12 p-md-4">
-          <label>Basic</label>
-          <p-calendar formControlName="dob"></p-calendar>
+          <p-calendar formControlName="dob" placeholder="Date of birth"></p-calendar>
         </div>
       </div>
     </div>
 
     <button
-      type="submit"
-      name="submit"
-      class="btn btn-outline-success btn-lg btn-block"
-      (click)="onSave()"
-    >Publish</button>   
+    type="submit"
+    name="submit"
+    class="button"
+    (click)="onSave()"
+    >Save</button> 
+
+      
+  </div>
 
   </form>
 </div>
-

@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from "primeng/calendar";
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CalendarModule } from "primeng/calendar";
     HomeComponent,
     ListComponent,
     ReportComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
