@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PersonApiService } from '../services/api/person-api.service';
 
 
@@ -15,9 +15,30 @@ export class EditDialogComponent implements OnInit {
   id: number = 0;
   person: any;
 
+  validationMessage: {
+    [key: string]: string;
+  } = {};
+
+  validation_messages = {
+    'name': [
+      { type: 'required', message: 'Name is required' },
+      { type: 'minlength', message: 'Name must be at least 5 characters long' },
+      { type: 'maxlength', message: 'Name cannot be more than 25 characters long' }
+    ],
+    'surname': [
+      { type: 'required', message: 'Surname is required' },
+      { type: 'minlength', message: 'Surname must be at least 5 characters long' },
+      { type: 'maxlength', message: 'Surname cannot be more than 25 characters long' }
+    ],
+    'dob': [
+      { type: 'required', message: 'Date of birth is required' }
+    ]
+    }
+
   constructor(private formBuilder: FormBuilder,
               private personService: PersonApiService,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private dialogRef: MatDialogRef<EditDialogComponent>) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -52,20 +73,20 @@ export class EditDialogComponent implements OnInit {
   }
 
   onSave() {
-    // TODO: Handle the call to the API to update the user/create the user.
-    console.log(this.personForm);
-    if (this.id === 0) {
-      this.personService.createPerson(this.personForm.value)
-        .subscribe(res => {
-          console.log(res);
-        });
-    } else {
-       this.personService.updatePerson(this.personForm.value, this.id)
-        .subscribe(res => {
-          console.log(res);
-        })
+    if (!this.personForm.valid) {
+      this.personForm.markAllAsTouched();
     }
-
+    
+    if (this.personForm.valid) {
+      if (this.id === 0) {
+        this.personService.createPerson(this.personForm.value)
+          .subscribe();
+      } else {
+         this.personService.updatePerson(this.personForm.value, this.id)
+          .subscribe()
+      }
+      this.dialogRef.close();
+    }
   }
 
 }

@@ -8,8 +8,8 @@
 
   <div class="flex-form">
     <h1 class="text-center my-4 h3">{{ id > 0 ? 'Edit' : 'Add' }} person</h1>
-    <div class="form-group">
-      <input
+    <mat-form-field class="form-group">
+      <input matInput
         type="text"
         name="name"
         id="name"
@@ -18,10 +18,13 @@
         placeholder="Name"
         autocomplete="off"
       />
-    </div>
+      <mat-error *ngFor="let validation of validation_messages.name">
+        <mat-error class="error-message" *ngIf="personForm.get('name').hasError(validation.type) && (personForm.get('name').dirty || personForm.get('name').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
 
-    <div class="form-group">
-      <input
+  <mat-form-field class="form-group">
+      <input matInput
       type="text"
       name="surname"
       id="surname"
@@ -30,24 +33,24 @@
       placeholder="Surname"
       autocomplete="off"
     />
-    </div>
+    <mat-error *ngFor="let validation of validation_messages.surname">
+      <mat-error class="error-message" *ngIf="personForm.get('surname').hasError(validation.type) && (personForm.get('surname').dirty || personForm.get('surname').touched)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
 
 
     <div class="form-group">
-
       <div class="p-fluid p-grid p-formgrid">
         <div class="p-field p-col-12 p-md-4">
           <p-calendar formControlName="dob" placeholder="Date of birth"></p-calendar>
+          <mat-error *ngFor="let validation of validation_messages.dob">
+            <mat-error class="error-message error-small" *ngIf="personForm.get('dob').hasError(validation.type) && (personForm.get('dob').dirty || personForm.get('dob').touched)">{{validation.message}}</mat-error>
+          </mat-error>
         </div>
       </div>
     </div>
 
-    <button
-    type="submit"
-    name="submit"
-    class="button"
-    (click)="onSave()"
-    >Save</button> 
+    <button type="submit" name="submit" class="button" (click)="onSave()">Save</button> 
 
       
   </div>

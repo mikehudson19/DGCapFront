@@ -4,12 +4,16 @@
   gap: 2rem;
   align-items: center;
   margin-top: 10rem;
+  text-align: center;
 }
 
 .main-card {
-  width: 10rem;
+  width: 15rem;
+  background: rgb(243, 243, 243);
 }
 
 a {
   text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
 }

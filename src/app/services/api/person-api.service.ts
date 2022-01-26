@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IPerson } from 'src/app/types/person';
+import { PersonsResponse } from 'src/app/types/personsResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +12,28 @@ export class PersonApiService {
 
   constructor(private http: HttpClient) { }
 
-  getPersons(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/persons`);
+  route: string = "persons"
+
+  getPersons(): Observable<PersonsResponse> {
+    return this.http.get<PersonsResponse>(`${environment.apiUrl}/${this.route}`);
   }
 
-  getPerson(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/persons/${id}`);
+  getPerson(id: number): Observable<IPerson> {
+    return this.http.get<IPerson>(`${environment.apiUrl}/${this.route}/${id}`);
   }
 
-  updatePerson(person: any, id: any): Observable<any> {
+  updatePerson(person: IPerson, id: number): Observable<IPerson> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<any>(`${environment.apiUrl}/persons/${id}`, person, { headers });
+    return this.http.put<IPerson>(`${environment.apiUrl}/${this.route}/${id}`, person, { headers });
   }
 
-  createPerson(person: any): Observable<any> {
+  createPerson(person: IPerson): Observable<IPerson> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${environment.apiUrl}/persons`, person, { headers });
+    return this.http.post<IPerson>(`${environment.apiUrl}/${this.route}`, person, { headers });
   }
 
-  deletePerson(id: any): Observable<any> {
+  deletePerson(id: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-    return this.http.delete<any>(`${environment.apiUrl}/persons/${id}`, { headers });
+    return this.http.delete<any>(`${environment.apiUrl}/${this.route}/${id}`, { headers });
   }
 }

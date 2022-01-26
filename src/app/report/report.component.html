@@ -1,10 +1,122 @@
-<div *ngIf="loadPage" class="card-wrapper">
-  <mat-card class="main-card" *ngFor="let item of months | keyvalue">
-    <mat-card-header>
-      <mat-card-title> {{ item.key }} </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <h3>{{ item.value }}</h3>
-    </mat-card-content>
-  </mat-card>
+<div class="container">
+  <h1>Report of birth months</h1>
+
+  <div *ngIf="loadPage" class="card-wrapper">
+    <!-- <mat-card class="main-card" *ngFor="let item of months | keyvalue">
+      <mat-card-header>
+        <mat-card-title> {{ item.key }} </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ item.value }}</span>
+      </mat-card-content>
+    </mat-card> -->
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> January </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.January }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> February </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.February }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> March </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.March }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> April </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.April }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> May </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.May }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> June </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.June }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> July </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.July }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> August </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.August }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> September </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.September }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> October </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.October }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> November </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.November }}</span>
+      </mat-card-content>
+    </mat-card>
+  
+    <mat-card class="main-card">
+      <mat-card-header>
+        <mat-card-title> December </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="value">{{ months.December }}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
 </div>

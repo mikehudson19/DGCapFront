@@ -1,6 +1,6 @@
 .container {
   width: 20rem;
-  height: 25rem;
+  height: 30rem;
 }
 
 .flex-form {
@@ -30,4 +30,8 @@
 
 ::ng-deep .p-datepicker { //not currently working
   height: 2.5rem;
+}
+
+.error-small {
+  font-size: 10px;
 }

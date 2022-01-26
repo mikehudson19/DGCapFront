@@ -1,10 +1,25 @@
 .card-wrapper {
-  margin: 3rem;
+  margin: 3rem auto;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  width: 60%;
 }
 
 .main-card {
   width: 280px;
+  background: rgb(243, 243, 243);
+}
+
+.value {
+  font-size: 1.3rem;
+  margin-left: 15px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  margin: 2rem 0;
 }

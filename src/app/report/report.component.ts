@@ -1,14 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { PersonApiService } from '../services/api/person-api.service';
-
-interface Person {
-  name: string;
-  surname: string;
-  dob: Date;
-}
+import { IPerson } from '../types/person';
 
 @Component({
   selector: 'app-report',
@@ -17,8 +10,6 @@ interface Person {
 })
 export class ReportComponent implements OnInit {
 
-  data = {};
-  people: Person[] = [];
   loadPage: boolean = false;
   months = {
     January: 0,
@@ -38,11 +29,10 @@ export class ReportComponent implements OnInit {
   constructor(private personService: PersonApiService) { }
 
   ngOnInit(): void {
-
     this.personService.getPersons()
       .pipe(
         map(res => { 
-          const dates = res.rows.map((x: any) => {
+          const dates = res.rows.map((x: IPerson) => {
             return new Date(x.dob).getMonth();
           })  
           return dates;
@@ -55,7 +45,7 @@ export class ReportComponent implements OnInit {
 
   }
 
-  populateMonths(dates: any) {
+  populateMonths(dates: number[]) {
     for (let i = 0; i < dates.length; i++) {
       let num = dates[i];
 
