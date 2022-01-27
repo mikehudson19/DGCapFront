@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Form, FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PersonApiService } from '../services/api/person-api.service';
 
@@ -15,25 +15,18 @@ export class EditDialogComponent implements OnInit {
   id: number = 0;
   person: any;
 
-  validationMessage: {
-    [key: string]: string;
-  } = {};
-
   validation_messages = {
     'name': [
-      { type: 'required', message: 'Name is required' },
-      { type: 'minlength', message: 'Name must be at least 5 characters long' },
-      { type: 'maxlength', message: 'Name cannot be more than 25 characters long' }
+      { type: 'required', message: 'Name is required' }
     ],
     'surname': [
-      { type: 'required', message: 'Surname is required' },
-      { type: 'minlength', message: 'Surname must be at least 5 characters long' },
-      { type: 'maxlength', message: 'Surname cannot be more than 25 characters long' }
+      { type: 'required', message: 'Surname is required' }
     ],
     'dob': [
-      { type: 'required', message: 'Date of birth is required' }
+      { type: 'required', message: 'Date of birth is required' },
+      { type: 'futureDate', message: 'Date of birth cannot be in the future' }
     ]
-    }
+  }
 
   constructor(private formBuilder: FormBuilder,
               private personService: PersonApiService,
@@ -50,9 +43,9 @@ export class EditDialogComponent implements OnInit {
 
   initForm() {
     this.personForm = this.formBuilder.group({
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required, Validators.minLength(3)]],
       surname: ["", [Validators.required]],
-      dob: ["", [Validators.required]]
+      dob: ["", [Validators.required, this.futureDateValidator()]]
     })
   }
 
@@ -72,6 +65,22 @@ export class EditDialogComponent implements OnInit {
     });
   }
 
+  futureDateValidator() {
+    return (control: AbstractControl) : ValidationErrors | null => {
+      const value = control.value;
+
+      if (!value) {
+        return null;
+      }
+
+      if (value > new Date()) {
+        return {futureDate:true}
+      }
+
+      return null;
+    }
+  }
+
   onSave() {
     if (!this.personForm.valid) {
       this.personForm.markAllAsTouched();
@@ -80,12 +89,15 @@ export class EditDialogComponent implements OnInit {
     if (this.personForm.valid) {
       if (this.id === 0) {
         this.personService.createPerson(this.personForm.value)
-          .subscribe();
+          .subscribe(() => {
+            this.dialogRef.close();
+          });
       } else {
          this.personService.updatePerson(this.personForm.value, this.id)
-          .subscribe()
+          .subscribe(() => {
+            this.dialogRef.close();
+          })
       }
-      this.dialogRef.close();
     }
   }
 
