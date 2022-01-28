@@ -43,7 +43,7 @@ export class EditDialogComponent implements OnInit {
 
   initForm() {
     this.personForm = this.formBuilder.group({
-      name: ["", [Validators.required, Validators.minLength(3)]],
+      name: ["", [Validators.required]],
       surname: ["", [Validators.required]],
       dob: ["", [Validators.required, this.futureDateValidator()]]
     })
@@ -90,7 +90,8 @@ export class EditDialogComponent implements OnInit {
       if (this.id === 0) {
         this.personService.createPerson(this.personForm.value)
           .subscribe(() => {
-            this.dialogRef.close();
+            this.dialogRef.close(0);
+
           });
       } else {
          this.personService.updatePerson(this.personForm.value, this.id)
@@ -99,6 +100,10 @@ export class EditDialogComponent implements OnInit {
           })
       }
     }
+  }
+
+  onCancel() {
+    this.dialogRef.close();
   }
 
 }

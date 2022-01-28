@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
@@ -22,7 +23,8 @@ export class ListComponent implements OnInit {
 
   constructor(private dialogRef: MatDialog,
               private personService: PersonApiService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -60,9 +62,12 @@ export class ListComponent implements OnInit {
       }
     });
 
-    dialog.afterClosed().subscribe(() => {
+    dialog.afterClosed().subscribe((id) => {
       this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
         this.router.navigate(['/list']);
+        console.log(id);
+        let snackBarMsg = id == 0 ? "Person added" : "Person updated";
+        this.snackBar.open(snackBarMsg, "Okay", { duration: 2000 });
     }); 
     })
     
@@ -73,7 +78,8 @@ export class ListComponent implements OnInit {
       .subscribe(() => {
         this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
           this.router.navigate(['/list']);
-      }); 
+          this.snackBar.open('Person deleted!', "Okay", { duration: 2000 });
+        }); 
       })
   }
 }
