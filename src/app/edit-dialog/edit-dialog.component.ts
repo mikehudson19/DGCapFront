@@ -53,11 +53,11 @@ export class EditDialogComponent implements OnInit {
     this.personService
     .getPerson(id).subscribe((person) => {
       this.person = person;
-      this.displayAdvert();
+      this.displayPerson();
     });
   }
 
-  displayAdvert(): void {
+  displayPerson(): void {
     this.personForm.patchValue({
       name: this.person.name,
       surname: this.person.surname,

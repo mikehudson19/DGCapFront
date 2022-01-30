@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { MockPersonService } from '../mock-person.service';
 import { PersonApiService } from '../services/api/person-api.service';
 import { IPerson } from '../types/person';
 
@@ -21,16 +23,26 @@ export class ListComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'surname', 'age', 'edit', 'remove'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource()
 
+    // MatPaginator Inputs
+    length = 100;
+    pageSize = 10;
+    pageSizeOptions: number[] = [5, 10, 25, 100];
+  
+    // MatPaginator Output
+    pageEvent!: PageEvent;
+
   constructor(private dialogRef: MatDialog,
               private personService: PersonApiService,
               private router: Router,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private mockPersonService: MockPersonService) { }
 
   ngOnInit(): void {
 
-    this.personService.getPersons()
+    // this.personService.getPersons()
+    this.mockPersonService.getPersons()
       .pipe(
-        map(res => { 
+        map((res: any) => { 
           const data = res.rows.map((x: IPerson) => {
             return {
               id: x.id,
@@ -45,6 +57,7 @@ export class ListComponent implements OnInit {
       .subscribe((data: any) => {
         this.dataSource = new MatTableDataSource(data);
       });
+
   }
 
   convertDob(dob: Date): number {
@@ -65,7 +78,6 @@ export class ListComponent implements OnInit {
     dialog.afterClosed().subscribe((id) => {
       this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
         this.router.navigate(['/list']);
-        console.log(id);
         let snackBarMsg = id == 0 ? "Person added" : "Person updated";
         this.snackBar.open(snackBarMsg, "Okay", { duration: 2000 });
     }); 
@@ -81,5 +93,11 @@ export class ListComponent implements OnInit {
           this.snackBar.open('Person deleted!', "Okay", { duration: 2000 });
         }); 
       })
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
   }
 }

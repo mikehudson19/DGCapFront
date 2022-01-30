@@ -13,6 +13,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from "primeng/calendar";
 import { NavbarComponent } from './navbar/navbar.component';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    InMemoryWebApiModule.forRoot(DataService)
   ],
   providers: [],
   bootstrap: [AppComponent]

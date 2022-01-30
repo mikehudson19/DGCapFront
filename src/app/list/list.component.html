@@ -41,6 +41,14 @@
   </table>
 </div>
 
+
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event"
+               aria-label="Select page">
+</mat-paginator>
+
 <div class="button-container">
   <button class="add-button" (click)="openDialog(0)">Add person</button>
 </div>
