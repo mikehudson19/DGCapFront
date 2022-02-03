@@ -9,7 +9,7 @@ import { map, tap } from 'rxjs/operators';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MockPersonService } from '../mock-person.service';
 import { PersonApiService } from '../services/api/person-api.service';
-import { IPerson } from '../types/person';
+import { IPerson } from '../types/IPerson';
 
 @Component({
   selector: 'app-list',
@@ -39,11 +39,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.personService.getPersons()
-    this.mockPersonService.getPersons()
+    this.personService.getPersons()
       .pipe(
         map((res: any) => { 
-          const data = res.rows.map((x: IPerson) => {
+          const data = res.map((x: IPerson) => {
             return {
               id: x.id,
               name: x.name,

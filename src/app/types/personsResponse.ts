@@ -1,4 +1,4 @@
-import { IPerson } from './person';
+import { IPerson } from './IPerson';
 
 export interface PersonsResponse {
   count: number;

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MockPersonService } from '../mock-person.service';
 import { PersonApiService } from '../services/api/person-api.service';
 
 
@@ -31,11 +32,13 @@ export class EditDialogComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private personService: PersonApiService,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private dialogRef: MatDialogRef<EditDialogComponent>) { }
+              private dialogRef: MatDialogRef<EditDialogComponent>,
+              private mockPersonService: MockPersonService) { }
 
   ngOnInit(): void {
     this.initForm();
     this.id = this.data.id;
+    console.log("dataId",this.data.id);
     if (this.id > 0) {
       this.getPerson(this.id);
     }
@@ -91,7 +94,6 @@ export class EditDialogComponent implements OnInit {
         this.personService.createPerson(this.personForm.value)
           .subscribe(() => {
             this.dialogRef.close(0);
-
           });
       } else {
          this.personService.updatePerson(this.personForm.value, this.id)
