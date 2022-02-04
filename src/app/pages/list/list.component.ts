@@ -6,10 +6,10 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { map, tap } from 'rxjs/operators';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { MockPersonService } from '../mock-person.service';
-import { PersonApiService } from '../services/api/person-api.service';
-import { IPerson } from '../types/IPerson';
+import { ConfirmDialogComponent } from 'src/app/dialogs/confirm-dialog/confirm-dialog.component';
+import { EditDialogComponent } from '../../dialogs/edit-dialog/edit-dialog.component';
+import { PersonApiService } from '../../services/api/person-api.service';
+import { IPerson } from '../../types/IPerson';
 
 @Component({
   selector: 'app-list',
@@ -34,8 +34,7 @@ export class ListComponent implements OnInit {
   constructor(private dialogRef: MatDialog,
               private personService: PersonApiService,
               private router: Router,
-              private snackBar: MatSnackBar,
-              private mockPersonService: MockPersonService) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -67,30 +66,40 @@ export class ListComponent implements OnInit {
     return age;
   }
 
-  openDialog(id: number): void {
+  editPerson(id: number): void {
     const dialog = this.dialogRef.open(EditDialogComponent, {
       data: {
         id
       }
     });
 
-    dialog.afterClosed().subscribe((id) => {
-      this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/list']);
-        let snackBarMsg = id == 0 ? "Person added" : "Person updated";
-        this.snackBar.open(snackBarMsg, "Okay", { duration: 2000 });
-    }); 
+    dialog.afterClosed()
+      .subscribe((action) => {
+        if (action === "added" || action === "updated") {
+          this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/list']);
+            let snackBarMsg = action == "added" ? "Person added" : "Person updated";
+            this.snackBar.open(snackBarMsg, "Okay", { duration: 2500 });
+          }); 
+        }
     })
-    
   }
 
   deletePerson(id: number): void {
-    this.personService.deletePerson(id)
-      .subscribe(() => {
-        this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/list']);
-          this.snackBar.open('Person deleted!', "Okay", { duration: 2000 });
-        }); 
+    const dialog = this.dialogRef.open(ConfirmDialogComponent, {
+      data: {
+        id
+      }
+    });
+
+    dialog.afterClosed()
+      .subscribe((deleted: boolean) => {
+        if (deleted) {
+          this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/list']);
+          }); 
+          this.snackBar.open('Person deleted!', "Okay", { duration: 2500 });
+        }
       })
   }
 

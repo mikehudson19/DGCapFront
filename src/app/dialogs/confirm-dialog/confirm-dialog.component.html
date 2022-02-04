@@ -1,0 +1,7 @@
+<div *ngIf="person">
+  <h3>Are you sure you want to delete {{ person.name }} {{ person.surname }}?</h3>
+  <div class="action-buttons">
+    <button (click)="confirmDeletion()">Delete</button>
+    <button mat-dialog-close>Cancel</button>
+  </div>
+</div>

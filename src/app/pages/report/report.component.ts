@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MockPersonService } from '../mock-person.service';
-import { PersonApiService } from '../services/api/person-api.service';
-import { IPerson } from '../types/IPerson';
+import { PersonApiService } from '../../services/api/person-api.service';
+import { IPerson } from '../../types/IPerson';
 
 @Component({
   selector: 'app-report',
@@ -28,16 +27,14 @@ export class ReportComponent implements OnInit {
     December: 0
   };
 
-  constructor(private personService: PersonApiService,
-              private mockPersonService: MockPersonService) { }
+  constructor(private personService: PersonApiService) { }
 
   ngOnInit(): void {
 
-    // this.personService.getPersons()
-    this.mockPersonService.getPersons()
+    this.personService.getPersons()
       .pipe(
         map((res: any) => { 
-          const dates = res.rows.map((x: IPerson) => {
+          const dates = res.map((x: IPerson) => {
             return new Date(x.dob).getMonth();
           })  
           return dates;
