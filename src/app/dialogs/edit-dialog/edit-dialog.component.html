@@ -39,18 +39,14 @@
   </mat-form-field>
 
 
-    <div class="form-group">
-      <div class="p-fluid p-grid p-formgrid">
-        <div class="p-field p-col-12 p-md-4">
-          <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngFor="let validation of validation_messages.dob">
-            <mat-error class="error-message error-small" *ngIf="personForm.get('dob').hasError(validation.type) && (personForm.get('dob').dirty || personForm.get('dob').touched)">{{validation.message}}</mat-error>
-          </mat-error>
-        </div>
-      </div>
-    </div>
+    <mat-form-field class="form-group">
+      <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngFor="let validation of validation_messages.dob">
+        <mat-error class="error-message error-small" *ngIf="personForm.get('dob').hasError(validation.type) && (personForm.get('dob').dirty || personForm.get('dob').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
     <div class="action-box">
       <button type="submit" name="submit" class="button" (click)="onSave()">Save</button> 
       <button type="submit" name="submit" class="button" (click)="onCancel()">Cancel</button> 
