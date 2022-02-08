@@ -3,5 +3,6 @@ export interface IPerson {
   name: string;
   surname: string;
   dob: Date;
+  age?: number;
 }
 
