@@ -1,9 +1,9 @@
-div.material-table {
-  margin: 30px;
-  table {
-      width: 40%;
-      margin: 0 auto;
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
 }
 
 .add-button {

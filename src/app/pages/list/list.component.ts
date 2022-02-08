@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -17,19 +17,20 @@ import { IPerson } from '../../types/IPerson';
   styleUrls: ['./list.component.scss']
 })
 
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, AfterViewInit {
 
 
-  displayedColumns: string[] = [ 'name', 'surname', 'age', 'edit', 'remove'];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource()
+  displayedColumns: string[] = [ 'name', 'surname', 'age', 'edit', 'remove' ];
+  dataSource: MatTableDataSource<IPerson>;
 
     // MatPaginator Inputs
     length = 100;
     pageSize = 10;
     pageSizeOptions: number[] = [5, 10, 25, 100];
+    @ViewChild(MatPaginator) paginator: MatPaginator;
   
     // MatPaginator Output
-    pageEvent!: PageEvent;
+    // pageEvent!: PageEvent;
 
   constructor(private dialogRef: MatDialog,
               private personService: PersonApiService,
@@ -37,25 +38,28 @@ export class ListComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+  }
 
+  ngAfterViewInit() {
     this.personService.getPersons()
-      .pipe(
-        map((res: any) => { 
-          const data = res.map((x: IPerson) => {
-            return {
-              id: x.id,
-              name: x.name,
-              surname: x.surname,
-              age: this.convertDob(x.dob)
-            }
-          })
-          return data;
+    .pipe(
+      map((res: any) => { 
+        const data = res.map((x: IPerson) => {
+          return {
+            id: x.id,
+            name: x.name,
+            surname: x.surname,
+            age: this.convertDob(x.dob)
+          }
         })
-      )
-      .subscribe((data: any) => {
-        this.dataSource = new MatTableDataSource(data);
-      });
+        return data;
+      })
+    )
+    .subscribe((data: any) => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
 
+    });
   }
 
   convertDob(dob: Date): number {
@@ -108,4 +112,6 @@ export class ListComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
+
+  
 }
