@@ -1,17 +1,30 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 
-.add-button {
-  width: 8.5rem;
-  height: 2rem;
-  margin: 0 auto;
-  color: black;
-  font-size: 1rem;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    margin-top: 1rem;
+  }
+
+  .add-button {
+    width: 8.5rem;
+    height: 28px;
+    color: black;
+    font-size: 14px;
+  }
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
 }
 
 .add-button:hover {
@@ -22,20 +35,15 @@ a:hover {
   cursor: pointer;
 }
 
-th {
-  font-size: 1rem;
+.mat-column-remove {
+  max-width: 4rem;
+}
+
+.mat-column-edit {
+  max-width: 4rem;
+}
+
+.mat-header-cell {
+  font-size: 15px;
   color: black;
-}
-
-.remove {
-  width: 2rem;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-}
-
-h1 {
-  text-align: center;
 }

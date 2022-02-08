@@ -1,5 +1,9 @@
 <div class="container">
-  <h1>List of persons</h1>
+
+  <div class="header-container">
+    <h1>List of persons</h1>
+    <button class="add-button" (click)="editPerson(0)">Add person</button>
+  </div>
 
   <mat-table #table [dataSource]="dataSource"
      class="mat-elevation-z8">
@@ -31,10 +35,9 @@
     <!-- Remove Column -->
     <ng-container  matColumnDef="remove">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell class="remove" *matCellDef="let element"><a (click)="deletePerson(element.id)"> Remove </a></mat-cell>
+      <mat-cell *matCellDef="let element"><a (click)="deletePerson(element.id)"> Remove </a></mat-cell>
     </ng-container>
 
-   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
@@ -42,10 +45,7 @@
   <mat-paginator #paginator 
                 [pageSize]="10"
                 [pageSizeOptions]="[5, 10, 20]"
-                [showFirstLastButtons]="true">
+                [showFirstLastButtons]="true"
+                class="mat-elevation-z8">
   </mat-paginator>
 </div>
-
-<!-- <div class="button-container">
-  <button class="add-button" (click)="editPerson(0)">Add person</button>
-</div> -->
