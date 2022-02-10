@@ -6,6 +6,7 @@ import { Gender } from 'src/app/types/gender';
 import { PersonView } from 'src/app/types/PersonView';
 import { PersonApiService } from '../../services/api/person-api.service';
 import { IPerson } from '../../types/IPerson';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-report',
@@ -31,6 +32,23 @@ export class ReportComponent implements OnInit {
   };
   insights: any = {};
 
+  Highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options = {   
+    title: {
+       text: 'Number of people born per month'
+    },
+    xAxis:{
+       categories: ['Jan','Feb','Mar','Apr','May','Jun','Jul',
+       'Aug','Sep','Oct','Nov','Dec'],
+    },     
+    yAxis : {
+       min: 0,
+       title: {
+          text: 'No. of people'         
+       }      
+    }
+ };
+
   constructor(private personService: PersonApiService) { }
 
   ngOnInit(): void {
@@ -46,6 +64,7 @@ export class ReportComponent implements OnInit {
       )
       .subscribe((dates) => {
         this.populateMonths(dates);
+        this.setChartData();
         this.loadPage = true;
       })
 
@@ -66,7 +85,6 @@ export class ReportComponent implements OnInit {
         .subscribe((data: PersonView[]) => {
           this.generateInsights(data);
         })
-
   }
 
   populateMonths(dates: number[]) {
@@ -117,6 +135,14 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  setChartData() {
+    this.chartOptions.series = [{
+      name: 'People',
+      data: Object.values(this.months),
+      type: 'column'
+    }]  
+  }
+
   generateInsights(data: PersonView[]) {
     data.forEach((element: PersonView) => {
       if (element.age >= 50 && element.age < 100) {
@@ -140,7 +166,6 @@ export class ReportComponent implements OnInit {
       }
 
       this.insights.total = data.length;
-
     });
   }
 

@@ -16,6 +16,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DataService } from './services/data.service';
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
     ReportComponent,
     EditDialogComponent,
     NavbarComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +36,7 @@ import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HighchartsChartModule,
     CalendarModule,
     InMemoryWebApiModule.forRoot(DataService)
   ],
