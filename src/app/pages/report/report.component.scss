@@ -2,7 +2,8 @@
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .main-card {
@@ -16,7 +17,7 @@
 
 .container {
   margin: 2rem auto;
-  width: 80%;
+  width: 75%;
 }
 
 mat-card-content {
@@ -34,7 +35,7 @@ mat-card-content {
   left: 165px;
 }
 
-.line:after{
+.line:after {
   content:"";
   position:absolute;
   border-top:2.5px solid rgb(77, 76, 76);
@@ -45,9 +46,12 @@ mat-card-content {
 
 .stat-container {
   position: relative;
-  top: 65px;
+  top: 60px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;   
+  justify-content: flex-end;   
   width: 100%;
+  span {
+    font-size: 1.5rem;
+  }
 }

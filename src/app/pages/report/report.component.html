@@ -9,10 +9,6 @@
       </mat-card-header>
       <mat-card-content>
         <span class="value">{{ this.insights.total }}</span>
-        <div class="stat-container">
-          <span>Total: {{ this.insights.total }}</span>
-          <span> {{ (this.insights.total / this.insights.total) * 100 }}%</span>
-        </div>
       </mat-card-content>
     </mat-card>
 
@@ -23,7 +19,6 @@
       <mat-card-content>
         <span class="value"> {{ this.insights.halfCentenerians }} </span>
         <div class="stat-container">
-          <span>Total: {{ this.insights.total }}</span>
           <span>{{ (this.insights.halfCentenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
         </div>
       </mat-card-content>
@@ -36,7 +31,6 @@
       <mat-card-content>
         <span class="value">{{ this.insights.centenerians }}</span>
         <div class="stat-container">
-          <span>Total: {{ this.insights.total }}</span>
           <span>{{ (this.insights.centenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
         </div>
       </mat-card-content>
@@ -49,7 +43,6 @@
       <mat-card-content>
         <span class="value">{{ this.insights.men }}</span>
         <div class="stat-container">
-          <span>Total: {{ this.insights.total }}</span>
           <span>{{ (this.insights.men / this.insights.total) * 100 | number : '1.0-0' }}%</span>
         </div>
       </mat-card-content>
@@ -62,7 +55,6 @@
       <mat-card-content>
         <span class="value">{{ this.insights.women }}</span>
         <div class="stat-container">
-          <span>Total: {{ this.insights.total }}</span>
           <span>{{ (this.insights.women / this.insights.total) * 100 | number : '1.0-0' }}%</span>
         </div>
       </mat-card-content>
