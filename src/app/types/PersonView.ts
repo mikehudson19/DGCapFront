@@ -1,10 +1,9 @@
 import { Gender } from "./gender";
 
-export interface IPerson {
-  id?: number;
+export interface PersonView {
   name: string;
   surname: string;
-  dob: Date;
+  age: number;
   gender: Gender
 }
 
