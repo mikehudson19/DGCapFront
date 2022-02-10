@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Gender } from 'src/app/types/gender';
+import { PersonView } from 'src/app/types/PersonView';
 import { PersonApiService } from '../../services/api/person-api.service';
 import { IPerson } from '../../types/IPerson';
 
@@ -26,6 +29,7 @@ export class ReportComponent implements OnInit {
     November: 0,
     December: 0
   };
+  insights: any = {};
 
   constructor(private personService: PersonApiService) { }
 
@@ -44,6 +48,24 @@ export class ReportComponent implements OnInit {
         this.populateMonths(dates);
         this.loadPage = true;
       })
+
+      this.personService.getPersons()
+        .pipe(
+          map((res: any) => {
+            const data = res.map((x: IPerson) => {
+              return {
+                name: x.name,
+                surname: x.surname,
+                age: this.convertDob(x.dob),
+                gender: x.gender
+              }
+            })
+            return data;
+          })
+        )
+        .subscribe((data: PersonView[]) => {
+          this.generateInsights(data);
+        })
 
   }
 
@@ -93,6 +115,41 @@ export class ReportComponent implements OnInit {
           break;
       }
     }
+  }
+
+  generateInsights(data: PersonView[]) {
+    data.forEach((element: PersonView) => {
+      if (element.age >= 50 && element.age < 100) {
+        if (this.insights.halfCentenerians) this.insights.halfCentenerians++;
+        if (!this.insights.halfCentenerians) this.insights.halfCentenerians = 1;
+      }
+
+      if (element.age >= 100) {
+        if (this.insights.centenerians) this.insights.centenerians++;
+        if (!this.insights.centenerians)  this.insights.centenerians = 1;
+      }
+
+      if (element.gender === Gender.Male) {
+        if (this.insights.men) this.insights.men++;
+        if (!this.insights.men) this.insights.men = 1;
+      }
+
+      if (element.gender === Gender.Female) {
+        if (this.insights.women) this.insights.women++;
+        if (!this.insights.women) this.insights.women = 1;
+      }
+
+      this.insights.total = data.length;
+
+    });
+  }
+
+  convertDob(dob: Date): number {
+    var month_diff = Date.now() - new Date(dob).getTime();
+    var age_dt = new Date(month_diff);   
+    var year = age_dt.getUTCFullYear();  
+    var age = Math.abs(year - 1970); 
+    return age;
   }
 
 }

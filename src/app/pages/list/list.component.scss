@@ -20,15 +20,15 @@
     color: black;
     font-size: 14px;
   }
+
+  .add-button:hover {
+    cursor: pointer;
+  }
 }
 
 .mat-table {
   overflow: auto;
   max-height: 500px;
-}
-
-.add-button:hover {
-  cursor: pointer;
 }
 
 a:hover {

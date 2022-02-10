@@ -1,25 +1,53 @@
 .card-wrapper {
-  margin: 3rem auto;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
-  width: 60%;
+  justify-content: space-evenly;
 }
 
 .main-card {
-  width: 280px;
-  background: rgb(243, 243, 243);
+  width: 240px;
+  background: rgb(250, 250, 250);
 }
 
 .value {
-  font-size: 1.3rem;
-  margin-left: 15px;
-}
-
-h1 {
-  text-align: center;
+  font-size: 3.8rem;
 }
 
 .container {
-  margin: 2rem 0;
+  margin: 2rem auto;
+  width: 80%;
+}
+
+mat-card-content {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+}
+
+.line {
+  width:28px;
+  height:28px;
+  position:relative;
+  left: 165px;
+}
+
+.line:after{
+  content:"";
+  position:absolute;
+  border-top:2.5px solid rgb(77, 76, 76);
+  width:120px;
+  transform: rotate(135deg);
+  transform-origin: 0% 0%;
+}
+
+.stat-container {
+  position: relative;
+  top: 65px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;   
+  width: 100%;
 }

@@ -1,120 +1,70 @@
 <div class="container">
-  <h1>Report of birth months</h1>
+  <h1>People insights</h1>
 
   <div *ngIf="loadPage" class="card-wrapper">
-    <!-- <mat-card class="main-card" *ngFor="let item of months | keyvalue">
-      <mat-card-header>
-        <mat-card-title> {{ item.key }} </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ item.value }}</span>
-      </mat-card-content>
-    </mat-card> -->
+
     <mat-card class="main-card">
       <mat-card-header>
-        <mat-card-title> January </mat-card-title>
+        <mat-card-title> Total people </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ months.January }}</span>
+        <span class="value">{{ this.insights.total }}</span>
+        <div class="stat-container">
+          <span>Total: {{ this.insights.total }}</span>
+          <span> {{ (this.insights.total / this.insights.total) * 100 }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
-  
+
     <mat-card class="main-card">
       <mat-card-header>
-        <mat-card-title> February </mat-card-title>
+        <mat-card-title> 50 years + </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ months.February }}</span>
+        <span class="value"> {{ this.insights.halfCentenerians }} </span>
+        <div class="stat-container">
+          <span>Total: {{ this.insights.total }}</span>
+          <span>{{ (this.insights.halfCentenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
-  
+
     <mat-card class="main-card">
       <mat-card-header>
-        <mat-card-title> March </mat-card-title>
+        <mat-card-title> 100 years + </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ months.March }}</span>
+        <span class="value">{{ this.insights.centenerians }}</span>
+        <div class="stat-container">
+          <span>Total: {{ this.insights.total }}</span>
+          <span>{{ (this.insights.centenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
-  
+
     <mat-card class="main-card">
       <mat-card-header>
-        <mat-card-title> April </mat-card-title>
+        <mat-card-title> Men </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ months.April }}</span>
+        <span class="value">{{ this.insights.men }}</span>
+        <div class="stat-container">
+          <span>Total: {{ this.insights.total }}</span>
+          <span>{{ (this.insights.men / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
-  
+
     <mat-card class="main-card">
       <mat-card-header>
-        <mat-card-title> May </mat-card-title>
+        <mat-card-title> Women </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ months.May }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> June </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.June }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> July </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.July }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> August </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.August }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> September </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.September }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> October </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.October }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> November </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.November }}</span>
-      </mat-card-content>
-    </mat-card>
-  
-    <mat-card class="main-card">
-      <mat-card-header>
-        <mat-card-title> December </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <span class="value">{{ months.December }}</span>
+        <span class="value">{{ this.insights.women }}</span>
+        <div class="stat-container">
+          <span>Total: {{ this.insights.total }}</span>
+          <span>{{ (this.insights.women / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
