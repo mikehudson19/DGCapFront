@@ -24,6 +24,7 @@ export class PersonApiService {
 
   updatePerson(person: IPerson, id: number): Observable<IPerson> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    person.id = id;
     return this.http.put<IPerson>(`http://localhost:3000/${this.route}/${id}`, person, { headers });
   }
 

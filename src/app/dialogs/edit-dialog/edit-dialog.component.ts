@@ -97,7 +97,7 @@ export class EditDialogComponent implements OnInit {
          this.personService.updatePerson(this.personForm.value, this.id)
           .subscribe(() => {
             this.dialogRef.close("updated");
-          })
+          }) 
       }
     }
   }
