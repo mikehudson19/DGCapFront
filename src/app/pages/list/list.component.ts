@@ -62,6 +62,8 @@ export class ListComponent implements OnInit, AfterViewInit {
             const caseAdjustedSearchTerm = searchTerm.toLocaleLowerCase();
             this.dataSource = new MatTableDataSource(data.filter((word: any) => word.name.toLocaleLowerCase().includes(caseAdjustedSearchTerm) || 
                                                                                 word.surname.toLocaleLowerCase().includes(caseAdjustedSearchTerm))); 
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
           })
       })
   }
