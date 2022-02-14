@@ -2,10 +2,12 @@
 
   <div class="header-container">
     <h1>List of persons</h1>
-    <mat-form-field>
-      <input matInput placeholder="Search here" [formControl]="searchControl"> 
-    </mat-form-field>
-    <button class="add-button" (click)="editPerson(0)">Add person</button>
+    <div class="header-actions">
+      <button class="add-button" (click)="editPerson(0)">Add person</button>
+      <mat-form-field>
+        <input matInput placeholder="Search here" [formControl]="searchControl"> 
+      </mat-form-field>
+    </div>
   </div>
 
   <mat-table #table matSort [dataSource]="dataSource"
