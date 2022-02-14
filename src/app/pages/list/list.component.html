@@ -31,6 +31,12 @@
       <mat-cell *matCellDef="let element"> {{ element.age }} </mat-cell>
     </ng-container>
 
+     <!-- Gender Column -->
+     <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.gender }} </mat-cell>
+    </ng-container>
+
     <!-- Edit Column -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>

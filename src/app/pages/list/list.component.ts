@@ -20,7 +20,7 @@ import { IPerson } from '../../types/IPerson';
 
 export class ListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = [ 'name', 'surname', 'age', 'edit', 'remove' ];
+  displayedColumns: string[] = [ 'name', 'surname', 'age', 'gender', 'edit', 'remove' ];
   dataSource: MatTableDataSource<IPerson>;
 
   // MatPaginator Inputs
@@ -51,7 +51,8 @@ export class ListComponent implements OnInit, AfterViewInit {
             id: x.id,
             name: x.name,
             surname: x.surname,
-            age: this.convertDob(x.dob)
+            age: this.convertDob(x.dob),
+            gender: x.gender
           }
         })
         return data;
@@ -129,7 +130,8 @@ export class ListComponent implements OnInit, AfterViewInit {
                 id: x.id,
                 name: x.name,
                 surname: x.surname,
-                age: this.convertDob(x.dob)
+                age: this.convertDob(x.dob),
+                gender: x.gender
               }
             })
             return data;
@@ -144,6 +146,4 @@ export class ListComponent implements OnInit, AfterViewInit {
         })
     })
   }
-
-  
 }
