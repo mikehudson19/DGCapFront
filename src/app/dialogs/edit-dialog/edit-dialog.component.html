@@ -40,7 +40,7 @@
 
 
     <mat-form-field class="form-group">
-      <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="Choose a date">
+      <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="Birthdate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngFor="let validation of validation_messages.dob">

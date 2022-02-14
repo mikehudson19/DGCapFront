@@ -8,7 +8,7 @@
         <mat-card-title> Total people </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ this.insights.total }}</span>
+        <span class="value">{{ insights.total }}</span>
       </mat-card-content>
     </mat-card>
 
@@ -17,9 +17,10 @@
         <mat-card-title> 50 years + </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value"> {{ this.insights.halfCentenerians }} </span>
+        <span class="value"> {{ insights.halfCentenerians ? insights.halfCentenerians : 0 }} </span>
         <div class="stat-container">
-          <span>{{ (this.insights.halfCentenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="insights.halfCentenerians">{{ (insights.halfCentenerians / insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="!insights.halfCentenerians">0%</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -29,9 +30,10 @@
         <mat-card-title> 100 years + </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ this.insights.centenerians }}</span>
+        <span class="value">{{ insights.centenerians ? insights.centenerians : 0 }}</span>
         <div class="stat-container">
-          <span>{{ (this.insights.centenerians / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="insights.centenerians">{{ (insights.centenerians / insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="!insights.centenerians">0%</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -41,9 +43,10 @@
         <mat-card-title> Men </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ this.insights.men }}</span>
+        <span class="value">{{ insights.men ? insights.men : 0 }}</span>
         <div class="stat-container">
-          <span>{{ (this.insights.men / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="insights.men">{{ (insights.men / insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="!insights.men">0%</span>
         </div>
       </mat-card-content>
     </mat-card>
@@ -53,23 +56,18 @@
         <mat-card-title> Women </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span class="value">{{ this.insights.women }}</span>
+        <span class="value">{{ insights.women ? insights.women : 0 }}</span>
         <div class="stat-container">
-          <span>{{ (this.insights.women / this.insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="insights.women">{{ (insights.women / insights.total) * 100 | number : '1.0-0' }}%</span>
+          <span *ngIf="!insights.women">0%</span>
         </div>
       </mat-card-content>
     </mat-card>
 
     <highcharts-chart
-
     [Highcharts]="Highcharts"
     [options]="chartOptions"
-    style="width: 100%; height: 400px; display: block; margin-top: 3rem"
-  >
-
+    style="width: 100%; height: 400px; display: block; margin-top: 3rem">
   </highcharts-chart>
   </div>
-
- 
-  
 </div>

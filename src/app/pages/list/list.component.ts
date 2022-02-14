@@ -39,33 +39,7 @@ export class ListComponent implements OnInit, AfterViewInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(1000)
-      )
-      .subscribe(searchTerm => {
-        this.personService.getPersons()
-          .pipe(
-            map((res: any) => { 
-              const data = res.map((x: IPerson) => {
-                return {
-                  id: x.id,
-                  name: x.name,
-                  surname: x.surname,
-                  age: this.convertDob(x.dob)
-                }
-              })
-              return data;
-            })
-          )
-          .subscribe(data => {
-            const caseAdjustedSearchTerm = searchTerm.toLocaleLowerCase();
-            this.dataSource = new MatTableDataSource(data.filter((word: any) => word.name.toLocaleLowerCase().includes(caseAdjustedSearchTerm) || 
-                                                                                word.surname.toLocaleLowerCase().includes(caseAdjustedSearchTerm))); 
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          })
-      })
+    this.searchTable();
   }
 
   ngAfterViewInit() {
@@ -142,7 +116,33 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   searchTable() {
-
+    this.searchControl.valueChanges
+    .pipe(
+      debounceTime(1000)
+    )
+    .subscribe(searchTerm => {
+      this.personService.getPersons()
+        .pipe(
+          map((res: any) => { 
+            const data = res.map((x: IPerson) => {
+              return {
+                id: x.id,
+                name: x.name,
+                surname: x.surname,
+                age: this.convertDob(x.dob)
+              }
+            })
+            return data;
+          })
+        )
+        .subscribe(data => {
+          const caseAdjustedSearchTerm = searchTerm.toLocaleLowerCase();
+          this.dataSource = new MatTableDataSource(data.filter((word: any) => word.name.toLocaleLowerCase().includes(caseAdjustedSearchTerm) || 
+                                                                              word.surname.toLocaleLowerCase().includes(caseAdjustedSearchTerm))); 
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        })
+    })
   }
 
   
