@@ -110,12 +110,6 @@ export class ListComponent implements OnInit, AfterViewInit {
       })
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
-
   searchTable() {
     this.searchControl.valueChanges
     .pipe(
