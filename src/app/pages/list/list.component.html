@@ -22,7 +22,7 @@
     </ng-container>
 
     <!-- Surname Column -->
-    <ng-container matColumnDef="surname">
+    <ng-container matColumnDef="surname" class="surname">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Surname </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{ element.surname }} </mat-cell>
     </ng-container>
@@ -58,7 +58,7 @@
   <mat-paginator #paginator 
                 [pageSize]="10"
                 [pageSizeOptions]="[5, 10, 20]"
-                [showFirstLastButtons]="true"
+                [showFirstLastButtons]="firstLastButtons"
                 class="mat-elevation-z8">
   </mat-paginator>
 </div>

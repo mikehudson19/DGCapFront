@@ -11,6 +11,7 @@ import { ConfirmDialogComponent } from 'src/app/dialogs/confirm-dialog/confirm-d
 import { EditDialogComponent } from '../../dialogs/edit-dialog/edit-dialog.component';
 import { PersonApiService } from '../../services/api/person-api.service';
 import { IPerson } from '../../types/IPerson';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-list',
@@ -22,11 +23,13 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [ 'name', 'surname', 'age', 'gender', 'edit', 'remove' ];
   dataSource: MatTableDataSource<IPerson>;
+  isHandset: boolean = false;
 
   // MatPaginator Inputs
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  firstLastButtons = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -36,10 +39,26 @@ export class ListComponent implements OnInit, AfterViewInit {
   constructor(private dialogRef: MatDialog,
               private personService: PersonApiService,
               private router: Router,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
     this.searchTable();
+
+    this.breakpointObserver
+      .observe(Breakpoints.XSmall)
+      .pipe(map((result) => result.matches))
+      .subscribe((isHandset) => {
+        if (isHandset) {
+          this.displayedColumns = [ 'name', 'edit', 'remove' ];
+          this.firstLastButtons = false;
+        }
+
+        if (!isHandset) {
+          this.displayedColumns = [ 'name', 'surname', 'age', 'gender', 'edit', 'remove' ];
+          this.firstLastButtons = true;
+        }
+      });
   }
 
   ngAfterViewInit() {

@@ -54,3 +54,23 @@ a:hover {
   font-size: 15px;
   color: black;
 }
+
+@media (max-width: 810px) {
+  .header-container {
+    flex-direction: column;
+
+    .header-actions {
+      width: 100%;
+      align-items: space-evenly;
+      justify-content: space-evenly;
+    }
+
+    mat-form-field {
+      width: 40%;
+    }
+
+    .add-button {
+      width: 40%;
+    }
+  }
+}
