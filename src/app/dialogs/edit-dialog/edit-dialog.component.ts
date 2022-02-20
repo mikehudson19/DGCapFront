@@ -22,6 +22,9 @@ export class EditDialogComponent implements OnInit {
     'surname': [
       { type: 'required', message: 'Surname is required' }
     ],
+    'gender': [
+      { type: 'required', message: 'Gender is required' }
+    ],
     'dob': [
       { type: 'required', message: 'Date of birth is required' },
       { type: 'futureDate', message: 'Date of birth cannot be in the future' }
@@ -46,6 +49,7 @@ export class EditDialogComponent implements OnInit {
     this.personForm = this.formBuilder.group({
       name: ["", [Validators.required]],
       surname: ["", [Validators.required]],
+      gender: ["", [Validators.required]],
       dob: ["", [Validators.required, this.futureDateValidator()]]
     })
   }
@@ -62,6 +66,7 @@ export class EditDialogComponent implements OnInit {
     this.personForm.patchValue({
       name: this.person.name,
       surname: this.person.surname,
+      gender: this.person.gender,
       dob: this.person.dob
     });
   }

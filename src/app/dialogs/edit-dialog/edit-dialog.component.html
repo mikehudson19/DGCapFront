@@ -6,37 +6,47 @@
   [formGroup]="personForm"
   >
 
-  <div class="flex-form">
-    <h1 class="text-center my-4 h3">{{ id > 0 ? 'Edit' : 'Add' }} person</h1>
+    <div class="flex-form">
+      <h1 class="text-center my-4 h3">{{ id > 0 ? 'Edit' : 'Add' }} person</h1>
+      <mat-form-field class="form-group">
+        <input matInput
+          type="text"
+          name="name"
+          id="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Name"
+          autocomplete="off"
+        />
+        <mat-error *ngFor="let validation of validation_messages.name">
+          <mat-error class="error-message" *ngIf="personForm.get('name').hasError(validation.type) && (personForm.get('name').dirty || personForm.get('name').touched)">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+
     <mat-form-field class="form-group">
-      <input matInput
+        <input matInput
         type="text"
-        name="name"
-        id="name"
+        name="surname"
+        id="surname"
         class="form-control"
-        formControlName="name"
-        placeholder="Name"
+        formControlName="surname"
+        placeholder="Surname"
         autocomplete="off"
       />
-      <mat-error *ngFor="let validation of validation_messages.name">
-        <mat-error class="error-message" *ngIf="personForm.get('name').hasError(validation.type) && (personForm.get('name').dirty || personForm.get('name').touched)">{{validation.message}}</mat-error>
+      <mat-error *ngFor="let validation of validation_messages.surname">
+        <mat-error class="error-message" *ngIf="personForm.get('surname').hasError(validation.type) && (personForm.get('surname').dirty || personForm.get('surname').touched)">{{validation.message}}</mat-error>
       </mat-error>
     </mat-form-field>
 
-  <mat-form-field class="form-group">
-      <input matInput
-      type="text"
-      name="surname"
-      id="surname"
-      class="form-control"
-      formControlName="surname"
-      placeholder="Surname"
-      autocomplete="off"
-    />
-    <mat-error *ngFor="let validation of validation_messages.surname">
-      <mat-error class="error-message" *ngIf="personForm.get('surname').hasError(validation.type) && (personForm.get('surname').dirty || personForm.get('surname').touched)">{{validation.message}}</mat-error>
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field class="form-group">
+      <mat-select placeholder="Select gender" name="gender" formControlName="gender">
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+      </mat-select>
+      <mat-error *ngFor="let validation of validation_messages.gender">
+        <mat-error class="error-message" *ngIf="personForm.get('gender').hasError(validation.type) && (personForm.get('gender').dirty || personForm.get('gender').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
 
 
     <mat-form-field class="form-group">
@@ -47,6 +57,7 @@
         <mat-error class="error-message error-small" *ngIf="personForm.get('dob').hasError(validation.type) && (personForm.get('dob').dirty || personForm.get('dob').touched)">{{validation.message}}</mat-error>
       </mat-error>
     </mat-form-field>
+    
     <div class="action-box">
       <button type="submit" name="submit" class="button" (click)="onSave()">Save</button> 
       <button type="submit" name="submit" class="button" (click)="onCancel()">Cancel</button> 
