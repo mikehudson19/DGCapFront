@@ -101,7 +101,6 @@ export class ListComponent implements OnInit, AfterViewInit {
 
     dialog.afterClosed()
       .subscribe((action) => {
-        console.log(action);
         if (action === "added" || action === "updated") {
           this.router.navigateByUrl("/insights", { skipLocationChange: true }).then(() => {
             this.router.navigate(['/list']);
@@ -122,7 +121,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     dialog.afterClosed()
       .subscribe((deleted: boolean) => {
         if (deleted) {
-          this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl("/insights", { skipLocationChange: true }).then(() => {
             this.router.navigate(['/list']);
           }); 
           this.snackBar.open('Person deleted!', "Okay", { duration: 2500 });
