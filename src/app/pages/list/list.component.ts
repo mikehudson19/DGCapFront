@@ -101,8 +101,9 @@ export class ListComponent implements OnInit, AfterViewInit {
 
     dialog.afterClosed()
       .subscribe((action) => {
+        console.log(action);
         if (action === "added" || action === "updated") {
-          this.router.navigateByUrl("/report", { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl("/insights", { skipLocationChange: true }).then(() => {
             this.router.navigate(['/list']);
             let snackBarMsg = action == "added" ? "Person added" : "Person updated";
             this.snackBar.open(snackBarMsg, "Okay", { duration: 2500 });
